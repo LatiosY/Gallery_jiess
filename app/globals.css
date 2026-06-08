@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-bg: #faf9f7;
+    --color-surface: #f2f0ed;
+    --color-border: #e5e2dc;
+    --color-text: #1a1916;
+    --color-muted: #7a776f;
+    --color-accent: #c8773a;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: "Georgia", "Times New Roman", serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: "Georgia", "Times New Roman", serif;
+    letter-spacing: -0.02em;
+  }
+
+  .font-ui {
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+}
