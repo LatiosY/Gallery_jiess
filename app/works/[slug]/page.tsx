@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getWorkBySlug, works } from "@/lib/works";
+import { T } from "@/components/I18nProvider";
 
 export const dynamic = "force-static";
 
@@ -36,7 +37,9 @@ export default function WorkPage({ params }: Props) {
         style={{ color: "var(--color-muted)" }}
       >
         <span>←</span>
-        <span>All works</span>
+        <span>
+          <T zh="全部作品" en="All works" />
+        </span>
       </Link>
 
       {/* Header */}
@@ -90,7 +93,7 @@ export default function WorkPage({ params }: Props) {
             className="group flex flex-col gap-1 transition-opacity hover:opacity-60"
           >
             <span className="font-ui text-xs" style={{ color: "var(--color-muted)" }}>
-              ← Previous
+              ← <T zh="上一张" en="Previous" />
             </span>
             <span className="font-display text-sm" style={{ color: "var(--color-text)" }}>
               {prev.title}
@@ -106,7 +109,7 @@ export default function WorkPage({ params }: Props) {
             className="group flex flex-col items-end gap-1 transition-opacity hover:opacity-60"
           >
             <span className="font-ui text-xs" style={{ color: "var(--color-muted)" }}>
-              Next →
+              <T zh="下一张" en="Next" /> →
             </span>
             <span className="font-display text-sm" style={{ color: "var(--color-text)" }}>
               {next.title}

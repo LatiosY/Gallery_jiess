@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { T } from "@/components/I18nProvider";
 
 export const metadata: Metadata = {
   title: "About — Jiess",
@@ -16,7 +17,9 @@ export default function AboutPage() {
         style={{ color: "var(--color-muted)" }}
       >
         <span>←</span>
-        <span>All works</span>
+        <span>
+          <T zh="全部作品" en="All works" />
+        </span>
       </Link>
 
       {/* Portrait placeholder */}
@@ -25,7 +28,7 @@ export default function AboutPage() {
         style={{
           backgroundColor: "var(--color-surface)",
           width: "180px",
-          height: "220px",
+          height: "180px",
         }}
       >
         <img
@@ -43,7 +46,7 @@ export default function AboutPage() {
           className="font-ui mb-3 text-xs tracking-[0.25em] uppercase"
           style={{ color: "var(--color-muted)" }}
         >
-          About
+          <T zh="关于" en="About" />
         </p>
         <h1
           className="font-display text-4xl font-normal sm:text-5xl"
@@ -55,7 +58,7 @@ export default function AboutPage() {
 
       <div className="space-y-5 font-ui text-sm leading-relaxed" style={{ color: "var(--color-muted)" }}>
         <p>
-          在这里写自我介绍。
+          <T zh="自我介绍。" en="artist statement." />
         </p>
       </div>
 
@@ -68,7 +71,7 @@ export default function AboutPage() {
           className="font-ui mb-4 text-xs tracking-[0.25em] uppercase"
           style={{ color: "var(--color-muted)" }}
         >
-          Contact
+          <T zh="联系" en="Contact" />
         </p>
         <div className="font-ui flex flex-col gap-2 text-sm">
           <a

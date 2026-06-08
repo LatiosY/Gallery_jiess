@@ -2,13 +2,15 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { T, useI18n } from "@/components/I18nProvider";
 
 export default function Nav() {
   const pathname = usePathname();
+  const { lang, toggleLang } = useI18n();
 
   const links = [
-    { href: "/", label: "Works" },
-    { href: "/about", label: "About" },
+    { href: "/", label: <T zh="作品" en="Works" /> },
+    { href: "/about", label: <T zh="关于" en="About" /> },
   ];
 
   return (
@@ -46,6 +48,15 @@ export default function Nav() {
               </Link>
             );
           })}
+          <button
+            type="button"
+            onClick={toggleLang}
+            className="font-ui text-sm transition-opacity hover:opacity-60"
+            style={{ color: "var(--color-muted)" }}
+            aria-label={lang === "zh" ? "Switch to English" : "切换到中文"}
+          >
+            {lang === "zh" ? "EN" : "中文"}
+          </button>
         </nav>
       </div>
     </header>

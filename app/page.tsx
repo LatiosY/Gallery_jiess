@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { works } from "@/lib/works";
+import { T } from "@/components/I18nProvider";
 
 export const dynamic = "force-static";
 
@@ -12,7 +13,7 @@ export default function HomePage() {
           className="font-ui mb-3 text-xs tracking-[0.25em] uppercase"
           style={{ color: "var(--color-muted)" }}
         >
-          Selected Works
+          <T zh="全部作品" en="All Works" />
         </p>
         <h1
           className="font-display text-5xl font-normal leading-tight sm:text-7xl"
@@ -24,7 +25,7 @@ export default function HomePage() {
           className="font-ui mt-4 max-w-md text-sm leading-relaxed"
           style={{ color: "var(--color-muted)" }}
         >
-          Illustration · Painting · Mixed Media
+          <T zh="插画 · 角色设计" en="Illustration · Character Design" />
         </p>
       </section>
 
