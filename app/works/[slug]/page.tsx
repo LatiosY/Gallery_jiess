@@ -32,8 +32,8 @@ export default function WorkPage({ params }: Props) {
     <div className="mx-auto max-w-4xl px-6 py-14">
       {/* Back */}
       <Link
-        href="/"
-        className="font-ui mb-10 inline-flex items-center gap-2 text-sm transition-opacity hover:opacity-60"
+        href="/gallery"
+        className="brass-link font-ui mb-10 inline-flex items-center gap-2 text-sm underline transition-colors"
         style={{ color: "var(--color-muted)" }}
       >
         <span>←</span>
@@ -45,16 +45,15 @@ export default function WorkPage({ params }: Props) {
       {/* Header */}
       <div
         className="mb-10 border-b pb-10"
-        style={{ borderColor: "var(--color-border)" }}
+        style={{ borderColor: "var(--color-border-soft)" }}
       >
         <p
-          className="font-ui mb-2 text-xs tracking-[0.2em] uppercase"
-          style={{ color: "var(--color-muted)" }}
+          className="brass-label font-ui mb-2 text-xs"
         >
           {work.year} · {work.medium}
         </p>
         <h1
-          className="font-display text-4xl font-normal leading-tight sm:text-5xl"
+          className="font-display text-4xl font-semibold leading-tight sm:text-5xl"
           style={{ color: "var(--color-text)" }}
         >
           {work.title}
@@ -71,8 +70,7 @@ export default function WorkPage({ params }: Props) {
 
       {/* Image */}
       <div
-        className="overflow-hidden rounded-sm"
-        style={{ backgroundColor: "var(--color-surface)" }}
+        className="steam-frame relative overflow-hidden rounded-sm"
       >
         <img
           src={work.cover}
@@ -90,7 +88,7 @@ export default function WorkPage({ params }: Props) {
         {prev ? (
           <Link
             href={`/works/${prev.slug}`}
-            className="group flex flex-col gap-1 transition-opacity hover:opacity-60"
+            className="group flex flex-col gap-1 transition-opacity hover:opacity-70"
           >
             <span className="font-ui text-xs" style={{ color: "var(--color-muted)" }}>
               ← <T zh="上一张" en="Previous" />
@@ -106,7 +104,7 @@ export default function WorkPage({ params }: Props) {
         {next ? (
           <Link
             href={`/works/${next.slug}`}
-            className="group flex flex-col items-end gap-1 transition-opacity hover:opacity-60"
+            className="group flex flex-col items-end gap-1 transition-opacity hover:opacity-70"
           >
             <span className="font-ui text-xs" style={{ color: "var(--color-muted)" }}>
               <T zh="下一张" en="Next" /> →

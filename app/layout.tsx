@@ -19,7 +19,7 @@ export default function RootLayout({
       <body className="min-h-screen flex flex-col" style={{ backgroundColor: "var(--color-bg)" }}>
         <I18nProvider>
           <Nav />
-          <main className="flex-1">{children}</main>
+          <main className="flex-1 pt-[57px]">{children}</main>
           <Footer />
         </I18nProvider>
       </body>

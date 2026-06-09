@@ -66,5 +66,9 @@ export function useI18n() {
 
 export function T({ zh, en }: { zh: string; en: string }) {
   const { lang } = useI18n();
-  return <>{lang === "zh" ? zh : en}</>;
+  if (lang === "zh") {
+    return <span className="font-display">{zh}</span>;
+  }
+
+  return <>{en}</>;
 }

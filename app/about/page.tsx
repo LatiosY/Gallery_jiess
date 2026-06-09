@@ -13,7 +13,7 @@ export default function AboutPage() {
     <div className="mx-auto max-w-3xl px-6 py-14">
       <Link
         href="/"
-        className="font-ui mb-10 inline-flex items-center gap-2 text-sm transition-opacity hover:opacity-60"
+        className="brass-link font-ui mb-10 inline-flex items-center gap-2 text-sm underline transition-colors"
         style={{ color: "var(--color-muted)" }}
       >
         <span>←</span>
@@ -24,9 +24,8 @@ export default function AboutPage() {
 
       {/* Portrait placeholder */}
       <div
-        className="mb-12 overflow-hidden"
+        className="steam-frame relative mb-12 overflow-hidden"
         style={{
-          backgroundColor: "var(--color-surface)",
           width: "180px",
           height: "180px",
         }}
@@ -40,16 +39,15 @@ export default function AboutPage() {
 
       <div
         className="mb-10 border-b pb-10"
-        style={{ borderColor: "var(--color-border)" }}
+        style={{ borderColor: "var(--color-border-soft)" }}
       >
         <p
-          className="font-ui mb-3 text-xs tracking-[0.25em] uppercase"
-          style={{ color: "var(--color-muted)" }}
+          className="brass-label font-ui mb-3 text-xs"
         >
           <T zh="关于" en="About" />
         </p>
         <h1
-          className="font-display text-4xl font-normal sm:text-5xl"
+          className="font-display text-4xl font-semibold sm:text-5xl"
           style={{ color: "var(--color-text)" }}
         >
           Jiess
@@ -68,15 +66,14 @@ export default function AboutPage() {
         style={{ borderColor: "var(--color-border)" }}
       >
         <p
-          className="font-ui mb-4 text-xs tracking-[0.25em] uppercase"
-          style={{ color: "var(--color-muted)" }}
+          className="brass-label font-ui mb-4 text-xs"
         >
           <T zh="联系" en="Contact" />
         </p>
         <div className="font-ui flex flex-col gap-2 text-sm">
           <a
             href="mailto:lyz475223863@hotmail.com"
-            className="transition-opacity hover:opacity-60"
+            className="brass-link underline transition-colors"
             style={{ color: "var(--color-text)" }}
           >
             lyz475223863@hotmail.com
@@ -85,10 +82,10 @@ export default function AboutPage() {
             href="https://www.mihuashi.com/profiles/8237329"
             target="_blank"
             rel="noreferrer"
-            className="transition-opacity hover:opacity-60"
+            className="brass-link underline transition-colors"
             style={{ color: "var(--color-text)" }}
           >
-            Mihuashi ↗
+            <T zh="米画师 ↗" en="Mihuashi ↗" />
           </a>
         </div>
       </div>
