@@ -27,6 +27,10 @@ export default function HorizontalGallery({ works }: { works: Work[] }) {
     const track = trackRef.current;
     if (!section || !curtain || !track) return;
 
+    const sectionEl = section;
+    const curtainEl = curtain;
+    const trackEl = track;
+
     cleanupRef.current = () => {};
     hasCleanedRef.current = false;
     let cancelled = false;
@@ -46,18 +50,18 @@ export default function HorizontalGallery({ works }: { works: Work[] }) {
       const context = gsap.context(() => {
         const viewportHeight = () => window.innerHeight - 57;
         const curtainDistance = () => Math.min(220, Math.max(140, viewportHeight() * 0.22));
-        const getDistance = () => Math.max(0, track.scrollWidth - window.innerWidth);
+        const getDistance = () => Math.max(0, trackEl.scrollWidth - window.innerWidth);
         const updateStageHeight = () => {
-          section.style.height = `${viewportHeight() + curtainDistance() + getDistance()}px`;
+          sectionEl.style.height = `${viewportHeight() + curtainDistance() + getDistance()}px`;
         };
 
         updateStageHeight();
-        gsap.set(curtain, { xPercent: 0 });
-        gsap.set(track, { x: 0 });
+        gsap.set(curtainEl, { xPercent: 0 });
+        gsap.set(trackEl, { x: 0 });
 
         let curtainTween: gsap.core.Tween | null = null;
 
-        curtainTween = gsap.to(curtain, {
+        curtainTween = gsap.to(curtainEl, {
           xPercent: -100,
           ease: "none",
           scrollTrigger: {
@@ -70,7 +74,7 @@ export default function HorizontalGallery({ works }: { works: Work[] }) {
             onUpdate: (self) => {
               if (self.progress < 1) return;
 
-              gsap.set(curtain, { display: "none", xPercent: -100 });
+              gsap.set(curtainEl, { display: "none", xPercent: -100 });
               curtainTween?.kill();
               self.kill(false);
               curtainTween = null;
@@ -78,7 +82,7 @@ export default function HorizontalGallery({ works }: { works: Work[] }) {
           },
         });
 
-        gsap.to(track, {
+        gsap.to(trackEl, {
           x: () => -getDistance(),
           ease: "none",
           scrollTrigger: {
@@ -90,7 +94,7 @@ export default function HorizontalGallery({ works }: { works: Work[] }) {
             onRefreshInit: updateStageHeight,
           },
         });
-      }, section);
+      }, sectionEl);
 
       const refresh = () => ScrollTrigger.refresh();
       const stopAutoplay = () => {
@@ -108,10 +112,10 @@ export default function HorizontalGallery({ works }: { works: Work[] }) {
       const startAutoplay = () => {
         if (cancelled || autoplayFrame) return;
 
-        const targetY = section.offsetTop + section.offsetHeight - window.innerHeight;
+        const targetY = sectionEl.offsetTop + sectionEl.offsetHeight - window.innerHeight;
         if (targetY <= window.scrollY) return;
 
-        const totalDistance = Math.max(1, targetY - section.offsetTop);
+        const totalDistance = Math.max(1, targetY - sectionEl.offsetTop);
         const pixelsPerSecond = totalDistance / Math.max(18, works.length * 2.8);
 
         const step = (time: number) => {
@@ -157,7 +161,7 @@ export default function HorizontalGallery({ works }: { works: Work[] }) {
         window.removeEventListener("load", refresh);
         window.removeEventListener("resize", refresh);
         window.removeEventListener("touchstart", resumeAutoplaySoon);
-        section.style.height = "";
+        sectionEl.style.height = "";
         context.revert();
       };
     }
