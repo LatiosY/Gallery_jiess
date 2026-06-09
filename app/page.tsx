@@ -64,20 +64,6 @@ export default function HomePage() {
             />
           </div>
         </div>
-        <div
-          className="font-ui absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 text-xs uppercase sm:bottom-10"
-          style={{ color: "var(--color-muted)" }}
-        >
-          <img
-            src="/images/ui/scroll-arrow.svg"
-            alt=""
-            className="h-20 w-16 opacity-90"
-            aria-hidden="true"
-          />
-          <span className="tracking-[0.28em]">
-            <T zh="向下滑动" en="Scroll Down" />
-          </span>
-        </div>
       </section>
 
       <EnterGalleryOnScroll />

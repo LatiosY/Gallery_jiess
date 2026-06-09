@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 import type { Work } from "@/lib/works";
-import { T } from "@/components/I18nProvider";
 
 export default function HorizontalGallery({ works }: { works: Work[] }) {
   const sectionRef = useRef<HTMLElement | null>(null);
@@ -22,6 +21,9 @@ export default function HorizontalGallery({ works }: { works: Work[] }) {
   };
 
   useEffect(() => {
+    const isTouchLayout = window.matchMedia("(max-width: 767px)").matches;
+    if (isTouchLayout) return;
+
     const section = sectionRef.current;
     const curtain = curtainRef.current;
     const track = trackRef.current;
@@ -177,7 +179,53 @@ export default function HorizontalGallery({ works }: { works: Work[] }) {
   }, []);
 
   return (
-    <section id="gallery" ref={sectionRef} className="horizontal-stage relative">
+    <>
+      <section className="md:hidden">
+        <ul className="flex h-[calc(100dvh-57px)] snap-x snap-mandatory gap-6 overflow-x-auto px-6 py-10">
+          {works.map((work, idx) => (
+            <li
+              key={work.slug}
+              className="flex w-[78vw] max-w-sm flex-none snap-center flex-col justify-center"
+            >
+              <Link href={`/works/${work.slug}`} className="block">
+                <div
+                  className="steam-frame relative overflow-hidden"
+                  style={{ aspectRatio: idx % 5 === 2 ? "3/4" : "4/5" }}
+                >
+                  <img
+                    src={work.cover}
+                    alt={work.title}
+                    loading="lazy"
+                    className="absolute inset-0 h-full w-full object-cover"
+                  />
+                  <div
+                    className="absolute inset-0 z-10 flex items-end p-5"
+                    style={{ color: "var(--color-muted)" }}
+                  >
+                    <span className="font-ui text-xs opacity-80">
+                      {String(idx + 1).padStart(2, "0")}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="mt-4 space-y-1">
+                  <p
+                    className="font-display text-lg font-semibold leading-snug"
+                    style={{ color: "var(--color-text)" }}
+                  >
+                    {work.title}
+                  </p>
+                  <p className="font-ui text-xs" style={{ color: "var(--color-muted)" }}>
+                    {work.year} · {work.medium}
+                  </p>
+                </div>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section id="gallery" ref={sectionRef} className="horizontal-stage relative hidden md:block">
       <div className="sticky top-[57px] h-[calc(100vh-57px)] overflow-hidden">
         <div
           ref={curtainRef}
@@ -249,6 +297,7 @@ export default function HorizontalGallery({ works }: { works: Work[] }) {
           ))}
         </ul>
       </div>
-    </section>
+      </section>
+    </>
   );
 }
