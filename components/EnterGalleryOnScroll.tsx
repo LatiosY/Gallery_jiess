@@ -69,7 +69,7 @@ export default function EnterGalleryOnScroll() {
       <button
         type="button"
         onClick={handleCueClick}
-        className="font-ui fixed bottom-8 left-1/2 z-30 flex -translate-x-1/2 flex-col items-center gap-2 text-xs uppercase transition-opacity hover:opacity-70 sm:bottom-10"
+        className="font-ui absolute bottom-8 left-1/2 z-30 flex -translate-x-1/2 flex-col items-center gap-2 text-xs uppercase transition-opacity hover:opacity-70 sm:bottom-10"
         style={{ color: "var(--color-muted)" }}
       >
         <img

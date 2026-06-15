@@ -11,6 +11,7 @@ export default function HorizontalGallery({ works }: { works: Work[] }) {
   const cleanupRef = useRef<() => void>(() => {});
   const stopAutoplayRef = useRef<() => void>(() => {});
   const startAutoplayRef = useRef<() => void>(() => {});
+  const isHoveringWorkRef = useRef(false);
   const hasCleanedRef = useRef(false);
 
   const cleanupScrollTrigger = () => {
@@ -149,9 +150,19 @@ export default function HorizontalGallery({ works }: { works: Work[] }) {
           startAutoplay();
         }, 1000);
       };
+      const resumeAutoplayAfterWheel = () => {
+        stopAutoplay();
+        if (isHoveringWorkRef.current) return;
+
+        resumeTimeout = window.setTimeout(() => {
+          resumeTimeout = null;
+          startAutoplay();
+        }, 350);
+      };
 
       window.addEventListener("load", refresh);
       window.addEventListener("resize", refresh);
+      window.addEventListener("wheel", resumeAutoplayAfterWheel, { passive: true });
       window.addEventListener("touchstart", resumeAutoplaySoon, { passive: true });
       ScrollTrigger.refresh();
       window.setTimeout(startAutoplay, 250);
@@ -162,6 +173,7 @@ export default function HorizontalGallery({ works }: { works: Work[] }) {
         startAutoplayRef.current = () => {};
         window.removeEventListener("load", refresh);
         window.removeEventListener("resize", refresh);
+        window.removeEventListener("wheel", resumeAutoplayAfterWheel);
         window.removeEventListener("touchstart", resumeAutoplaySoon);
         sectionEl.style.height = "";
         context.revert();
@@ -250,8 +262,14 @@ export default function HorizontalGallery({ works }: { works: Work[] }) {
             <li
               key={work.slug}
               className="group flex w-[72vw] max-w-[520px] flex-none flex-col sm:w-[42vw]"
-              onMouseEnter={() => stopAutoplayRef.current()}
-              onMouseLeave={() => startAutoplayRef.current()}
+              onMouseEnter={() => {
+                isHoveringWorkRef.current = true;
+                stopAutoplayRef.current();
+              }}
+              onMouseLeave={() => {
+                isHoveringWorkRef.current = false;
+                startAutoplayRef.current();
+              }}
               style={{ transform: idx % 2 === 0 ? "translateY(-2vh)" : "translateY(4vh)" }}
             >
               <Link

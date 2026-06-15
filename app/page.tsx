@@ -64,9 +64,8 @@ export default function HomePage() {
             />
           </div>
         </div>
+        <EnterGalleryOnScroll />
       </section>
-
-      <EnterGalleryOnScroll />
     </>
   );
 }
