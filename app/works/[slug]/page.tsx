@@ -29,12 +29,11 @@ export default function WorkPage({ params }: Props) {
   const next = works[currentIndex + 1];
 
   return (
-    <div className="mx-auto max-w-4xl px-6 py-14">
+    <div className="mx-auto max-w-5xl px-4 py-10 sm:px-6 sm:py-14">
       {/* Back */}
       <Link
         href="/gallery"
-        className="brass-link font-ui mb-10 inline-flex items-center gap-2 text-sm underline transition-colors"
-        style={{ color: "var(--color-muted)" }}
+        className="font-ui brutal-button mb-8 inline-flex items-center gap-2 px-4 py-3 text-xs"
       >
         <span>←</span>
         <span>
@@ -44,24 +43,23 @@ export default function WorkPage({ params }: Props) {
 
       {/* Header */}
       <div
-        className="mb-10 border-b pb-10"
-        style={{ borderColor: "var(--color-border-soft)" }}
+        className="brutal-panel mb-10 p-6 sm:p-8"
       >
         <p
-          className="brass-label font-ui mb-2 text-xs"
+          className="brass-label font-ui mb-5 text-xs"
         >
           {work.year} · {work.medium}
         </p>
         <h1
-          className="font-display text-4xl font-semibold leading-tight sm:text-5xl"
+          className="font-display text-5xl font-black uppercase leading-none sm:text-7xl"
           style={{ color: "var(--color-text)" }}
         >
           {work.title}
         </h1>
         {work.description && (
           <p
-            className="font-ui mt-4 max-w-xl text-sm leading-relaxed"
-            style={{ color: "var(--color-muted)" }}
+            className="mt-6 max-w-xl border-l-[6px] py-1 pl-5 text-base font-black leading-7"
+            style={{ borderColor: "var(--color-accent)", color: "var(--color-muted)" }}
           >
             {work.description}
           </p>
@@ -70,7 +68,7 @@ export default function WorkPage({ params }: Props) {
 
       {/* Image */}
       <div
-        className="steam-frame relative overflow-hidden rounded-sm"
+        className="brutal-frame relative overflow-hidden"
       >
         <img
           src={work.cover}
@@ -82,39 +80,38 @@ export default function WorkPage({ params }: Props) {
 
       {/* Prev / Next navigation */}
       <nav
-        className="mt-16 flex items-center justify-between border-t pt-10"
-        style={{ borderColor: "var(--color-border)" }}
+        className="mt-14 grid gap-5 sm:grid-cols-2"
       >
         {prev ? (
           <Link
             href={`/works/${prev.slug}`}
-            className="group flex flex-col gap-1 transition-opacity hover:opacity-70"
+            className="brutal-button flex flex-col gap-2 px-5 py-4"
           >
-            <span className="font-ui text-xs" style={{ color: "var(--color-muted)" }}>
+            <span className="font-ui text-xs">
               ← <T zh="上一张" en="Previous" />
             </span>
-            <span className="font-display text-sm" style={{ color: "var(--color-text)" }}>
+            <span className="font-display text-2xl font-black uppercase leading-none">
               {prev.title}
             </span>
           </Link>
         ) : (
-          <div />
+          <div className="hidden sm:block" />
         )}
 
         {next ? (
           <Link
             href={`/works/${next.slug}`}
-            className="group flex flex-col items-end gap-1 transition-opacity hover:opacity-70"
+            className="brutal-button flex flex-col items-end gap-2 px-5 py-4 text-right"
           >
-            <span className="font-ui text-xs" style={{ color: "var(--color-muted)" }}>
+            <span className="font-ui text-xs">
               <T zh="下一张" en="Next" /> →
             </span>
-            <span className="font-display text-sm" style={{ color: "var(--color-text)" }}>
+            <span className="font-display text-2xl font-black uppercase leading-none">
               {next.title}
             </span>
           </Link>
         ) : (
-          <div />
+          <div className="hidden sm:block" />
         )}
       </nav>
     </div>

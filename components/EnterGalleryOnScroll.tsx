@@ -69,13 +69,12 @@ export default function EnterGalleryOnScroll() {
       <button
         type="button"
         onClick={handleCueClick}
-        className="font-ui absolute bottom-8 left-1/2 z-30 flex -translate-x-1/2 flex-col items-center gap-2 text-xs uppercase transition-opacity hover:opacity-70 sm:bottom-10"
-        style={{ color: "var(--color-muted)" }}
+        className="font-ui brutal-button absolute bottom-8 left-1/2 z-30 flex -translate-x-1/2 flex-col items-center gap-1 px-5 py-3 text-[0.68rem] uppercase sm:bottom-10"
       >
         <img
           src="/images/ui/scroll-arrow.svg"
           alt=""
-          className="h-20 w-16 opacity-90"
+          className="h-12 w-12 contrast-200"
           aria-hidden="true"
         />
         <span className="tracking-[0.28em]">
@@ -88,7 +87,8 @@ export default function EnterGalleryOnScroll() {
           isEntering ? "translate-y-0" : "translate-y-full"
         }`}
         style={{
-          backgroundColor: "#6bb6d6",
+          backgroundColor: "var(--color-curtain)",
+          borderTop: "4px solid var(--color-border)",
         }}
         aria-hidden={!isEntering}
       />

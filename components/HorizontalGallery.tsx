@@ -12,6 +12,7 @@ export default function HorizontalGallery({ works }: { works: Work[] }) {
   const stopAutoplayRef = useRef<() => void>(() => {});
   const startAutoplayRef = useRef<() => void>(() => {});
   const isHoveringWorkRef = useRef(false);
+  const isCurtainVisibleRef = useRef(true);
   const hasCleanedRef = useRef(false);
 
   const cleanupScrollTrigger = () => {
@@ -59,6 +60,7 @@ export default function HorizontalGallery({ works }: { works: Work[] }) {
         };
 
         updateStageHeight();
+        isCurtainVisibleRef.current = true;
         gsap.set(curtainEl, { xPercent: 0 });
         gsap.set(trackEl, { x: 0 });
 
@@ -77,10 +79,14 @@ export default function HorizontalGallery({ works }: { works: Work[] }) {
             onUpdate: (self) => {
               if (self.progress < 1) return;
 
+              isCurtainVisibleRef.current = false;
               gsap.set(curtainEl, { display: "none", xPercent: -100 });
               curtainTween?.kill();
               self.kill(false);
               curtainTween = null;
+              if (isHoveringWorkRef.current) {
+                stopAutoplayRef.current();
+              }
             },
           },
         });
@@ -152,7 +158,7 @@ export default function HorizontalGallery({ works }: { works: Work[] }) {
       };
       const resumeAutoplayAfterWheel = () => {
         stopAutoplay();
-        if (isHoveringWorkRef.current) return;
+        if (isHoveringWorkRef.current && !isCurtainVisibleRef.current) return;
 
         resumeTimeout = window.setTimeout(() => {
           resumeTimeout = null;
@@ -193,7 +199,7 @@ export default function HorizontalGallery({ works }: { works: Work[] }) {
   return (
     <>
       <section className="md:hidden">
-        <ul className="flex h-[calc(100dvh-57px)] snap-x snap-mandatory gap-6 overflow-x-auto px-6 py-10">
+        <ul className="scroll-gallery flex h-[calc(100dvh-57px)] snap-x snap-mandatory gap-7 overflow-x-auto px-6 py-10">
           {works.map((work, idx) => (
             <li
               key={work.slug}
@@ -201,7 +207,7 @@ export default function HorizontalGallery({ works }: { works: Work[] }) {
             >
               <Link href={`/works/${work.slug}`} className="block">
                 <div
-                  className="steam-frame relative overflow-hidden"
+                  className="brutal-frame relative overflow-hidden"
                   style={{ aspectRatio: idx % 5 === 2 ? "3/4" : "4/5" }}
                 >
                   <img
@@ -211,23 +217,23 @@ export default function HorizontalGallery({ works }: { works: Work[] }) {
                     className="absolute inset-0 h-full w-full object-cover"
                   />
                   <div
-                    className="absolute inset-0 z-10 flex items-end p-5"
-                    style={{ color: "var(--color-muted)" }}
+                    className="absolute inset-0 z-10 flex items-start justify-between p-4"
+                    style={{ color: "var(--color-text)" }}
                   >
-                    <span className="font-ui text-xs opacity-80">
+                    <span className="font-ui brutal-tag px-3 py-2 text-xs">
                       {String(idx + 1).padStart(2, "0")}
                     </span>
                   </div>
                 </div>
 
-                <div className="mt-4 space-y-1">
+                <div className="brutal-panel-sm mt-5 p-4">
                   <p
-                    className="font-display text-lg font-semibold leading-snug"
+                    className="font-display text-2xl font-black uppercase leading-none"
                     style={{ color: "var(--color-text)" }}
                   >
                     {work.title}
                   </p>
-                  <p className="font-ui text-xs" style={{ color: "var(--color-muted)" }}>
+                  <p className="font-ui mt-2 text-[0.68rem] uppercase" style={{ color: "var(--color-muted)" }}>
                     {work.year} · {work.medium}
                   </p>
                 </div>
@@ -238,83 +244,91 @@ export default function HorizontalGallery({ works }: { works: Work[] }) {
       </section>
 
       <section id="gallery" ref={sectionRef} className="horizontal-stage relative hidden md:block">
-      <div className="sticky top-[57px] h-[calc(100vh-57px)] overflow-hidden">
-        <div
-          ref={curtainRef}
-          className="absolute inset-0 z-20 flex items-center justify-center px-6"
-          style={{
-            backgroundColor: "#6bb6d6",
-          }}
-        >
-        </div>
+        <div className="sticky top-[57px] h-[calc(100vh-57px)] overflow-hidden">
+          <div
+            ref={curtainRef}
+            className="absolute inset-0 z-20 flex items-center justify-center border-b-[4px] px-6"
+            style={{
+              backgroundColor: "var(--color-curtain)",
+              borderColor: "var(--color-border)",
+            }}
+          >
+            <div className="brutal-panel max-w-3xl bg-white px-8 py-7 text-center">
+              <p className="font-ui brutal-tag mx-auto mb-5 inline-flex px-4 py-2 text-xs">
+                Gallery
+              </p>
+              <h2 className="font-display text-6xl font-black uppercase leading-none">
+                Works
+              </h2>
+            </div>
+          </div>
 
-        <div
-          className="pointer-events-none absolute left-0 right-0 top-1/2 h-px"
-          style={{ backgroundColor: "var(--color-border-soft)" }}
-          aria-hidden="true"
-        />
+          <div
+            className="pointer-events-none absolute left-0 right-0 top-1/2 h-[4px]"
+            style={{ backgroundColor: "var(--color-border)" }}
+            aria-hidden="true"
+          />
 
-        <ul
-          ref={trackRef}
-          className="flex h-full w-max items-center gap-10 px-[18vw] sm:gap-14"
-        >
-          {works.map((work, idx) => (
-            <li
-              key={work.slug}
-              className="group flex w-[72vw] max-w-[520px] flex-none flex-col sm:w-[42vw]"
-              onMouseEnter={() => {
-                isHoveringWorkRef.current = true;
-                stopAutoplayRef.current();
-              }}
-              onMouseLeave={() => {
-                isHoveringWorkRef.current = false;
-                startAutoplayRef.current();
-              }}
-              style={{ transform: idx % 2 === 0 ? "translateY(-2vh)" : "translateY(4vh)" }}
-            >
-              <Link
-                href={`/works/${work.slug}`}
-                className="block"
-                onClick={() => {
-                  window.dispatchEvent(new CustomEvent("gallery:cleanup-scroll"));
+          <ul
+            ref={trackRef}
+            className="flex h-full w-max items-center gap-12 px-[18vw] sm:gap-16"
+          >
+            {works.map((work, idx) => (
+              <li
+                key={work.slug}
+                className="group flex w-[72vw] max-w-[520px] flex-none flex-col sm:w-[42vw]"
+                onMouseEnter={() => {
+                  isHoveringWorkRef.current = true;
+                  if (!isCurtainVisibleRef.current) {
+                    stopAutoplayRef.current();
+                  }
                 }}
+                onMouseLeave={() => {
+                  isHoveringWorkRef.current = false;
+                  startAutoplayRef.current();
+                }}
+                style={{ transform: idx % 2 === 0 ? "translateY(-2vh)" : "translateY(4vh)" }}
               >
-                <div
-                  className="steam-frame relative overflow-hidden"
-                  style={{ aspectRatio: idx % 5 === 2 ? "3/4" : "4/5" }}
+                <Link
+                  href={`/works/${work.slug}`}
+                  className="block transition-transform duration-200 group-hover:-translate-y-1"
+                  onClick={() => {
+                    window.dispatchEvent(new CustomEvent("gallery:cleanup-scroll"));
+                  }}
                 >
-                  <img
-                    src={work.cover}
-                    alt={work.title}
-                    loading="lazy"
-                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-                  />
                   <div
-                    className="absolute inset-0 z-10 flex items-end justify-between p-5"
-                    style={{ color: "var(--color-muted)" }}
+                    className="brutal-frame relative overflow-hidden"
+                    style={{ aspectRatio: idx % 5 === 2 ? "3/4" : "4/5" }}
                   >
-                    <span className="font-ui text-xs opacity-80">
-                      {String(idx + 1).padStart(2, "0")}
-                    </span>
+                    <img
+                      src={work.cover}
+                      alt={work.title}
+                      loading="lazy"
+                      className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                    />
+                    <div className="absolute inset-0 z-10 flex items-start justify-between p-5">
+                      <span className="font-ui brutal-tag px-3 py-2 text-xs">
+                        {String(idx + 1).padStart(2, "0")}
+                      </span>
+                    </div>
                   </div>
-                </div>
 
-                <div className="mt-4 space-y-1">
-                  <p
-                    className="font-display text-lg font-semibold leading-snug transition-colors group-hover:text-[var(--color-accent)]"
-                    style={{ color: "var(--color-text)" }}
-                  >
-                    {work.title}
-                  </p>
-                  <p className="font-ui text-xs" style={{ color: "var(--color-muted)" }}>
-                    {work.year} · {work.medium}
-                  </p>
-                </div>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </div>
+                  <div className="brutal-panel-sm mt-6 p-5 transition-colors group-hover:bg-[var(--color-brass)]">
+                    <p
+                      className="font-display text-3xl font-black uppercase leading-none"
+                      style={{ color: "var(--color-text)" }}
+                    >
+                      {work.title}
+                    </p>
+                    <p className="font-ui mt-2 text-xs uppercase" style={{ color: "var(--color-muted)" }}>
+                      {work.year} · {work.medium}
+                    </p>
+                  </div>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
       </section>
     </>
   );

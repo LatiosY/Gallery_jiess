@@ -15,32 +15,26 @@ export default function Nav() {
 
   return (
     <header
-      className="fixed left-0 right-0 top-0 z-50 border-b backdrop-blur-md"
+      className="fixed left-0 right-0 top-0 z-50 border-b-[4px]"
       style={{
-        backgroundColor: "rgba(238, 247, 251, 0.88)",
+        backgroundColor: "var(--color-bg)",
         borderColor: "var(--color-border)",
       }}
     >
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+      <div className="mx-auto flex h-[57px] max-w-6xl items-center justify-between gap-3 px-4 sm:px-6">
         <Link
           href="/"
           onClick={() => cleanupGalleryScroll("/")}
-          className="font-display text-base font-semibold tracking-[0.22em] transition-opacity hover:opacity-70"
-          style={{ color: "var(--color-text)" }}
+          className="font-display brutal-button brutal-button-active px-3 py-2 text-base leading-none tracking-[-0.04em] sm:px-4"
         >
           JIESS
         </Link>
 
-        <nav className="flex items-center gap-6">
+        <nav className="flex items-center gap-2 sm:gap-3">
           <Link
             href="/"
             onClick={() => cleanupGalleryScroll("/")}
-            className="font-ui text-xs uppercase underline transition-colors"
-            style={{
-              color: "var(--color-text)",
-              textDecorationColor: "var(--color-brass)",
-              textUnderlineOffset: "5px",
-            }}
+            className="font-ui brutal-button px-3 py-2 text-[0.68rem] leading-none sm:px-4"
           >
             <T zh="首页" en="Home" />
           </Link>
@@ -54,23 +48,14 @@ export default function Nav() {
 
               cleanupGalleryScroll("/gallery");
             }}
-            className="font-ui text-xs uppercase underline transition-colors"
-            style={{
-              color: "var(--color-text)",
-              textDecorationColor: "var(--color-brass)",
-              textUnderlineOffset: "5px",
-            }}
+            className="font-ui brutal-button px-3 py-2 text-[0.68rem] leading-none sm:px-4"
           >
             <T zh="作品" en="Gallery" />
           </Link>
           <button
             type="button"
             onClick={toggleLang}
-            className="font-ui border px-2 py-1 text-xs uppercase transition-colors hover:bg-black/5"
-            style={{
-              borderColor: "var(--color-border-soft)",
-              color: "var(--color-muted)",
-            }}
+            className="font-ui brutal-button px-3 py-2 text-[0.68rem] leading-none"
             aria-label={lang === "zh" ? "Switch to English" : "切换到中文"}
           >
             {lang === "zh" ? "EN" : <span className="font-display">中文</span>}

@@ -8,60 +8,56 @@ export default function HomePage() {
     <>
       <section
         id="home"
-        className="relative min-h-[calc(100vh-57px)] px-6 pb-32 pt-16 sm:pb-36 sm:pt-20"
+        className="relative min-h-[calc(100vh-57px)] px-4 pb-36 pt-8 sm:px-6 sm:pb-40 sm:pt-12"
       >
-        <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[1fr_320px] lg:items-center">
-          <div>
-            <p className="brass-label font-ui mb-4 text-xs">
+        <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[1fr_360px] lg:items-center">
+          <div className="brutal-panel relative overflow-hidden p-6 sm:p-10">
+            <div
+              className="absolute right-5 top-5 h-16 w-16 border-[4px]"
+              style={{
+                borderColor: "var(--color-border)",
+                backgroundColor: "var(--color-cyan)",
+              }}
+              aria-hidden="true"
+            />
+            <p className="brass-label font-ui mb-7 text-xs">
               <T zh="插画师" en="Artist" />
             </p>
-            <h1
-              className="font-display text-6xl font-semibold leading-none sm:text-8xl"
-              style={{
-                color: "var(--color-ink)",
-                textShadow: "0 1px 0 rgba(255, 255, 255, 0.55)",
-              }}
-            >
+            <h1 className="font-display max-w-3xl text-7xl font-black uppercase leading-[0.85] sm:text-9xl">
               Jiess
             </h1>
-            <p
-              className="font-ui mt-6 max-w-md text-sm leading-relaxed"
-              style={{ color: "var(--color-muted)" }}
-            >
+            <div className="mt-8 h-3 w-36 border-[3px]" style={{ borderColor: "var(--color-border)", backgroundColor: "var(--color-accent)" }} />
+            <p className="font-ui mt-8 max-w-xl text-base uppercase leading-relaxed" style={{ color: "var(--color-text)" }}>
               <T zh="插画 · 角色设计" en="Illustration · Character Design" />
             </p>
-            <p
-              className="font-ui mt-10 max-w-xl text-sm leading-7"
-              style={{ color: "var(--color-muted)" }}
-            >
+            <p className="mt-8 max-w-xl border-l-[6px] py-1 pl-5 text-lg font-black leading-8" style={{ borderColor: "var(--color-accent)", color: "var(--color-muted)" }}>
               <T zh="自我介绍。" en="artist statement." />
             </p>
-            <div className="font-ui mt-10 flex flex-col gap-2 text-sm sm:flex-row sm:gap-6">
-              <a
-                href="mailto:lyz475223863@hotmail.com"
-                className="brass-link underline transition-colors"
-              >
-                lyz475223863@hotmail.com
+            <div className="font-ui mt-10 flex flex-col gap-4 text-xs sm:flex-row">
+              <a href="mailto:lyz475223863@hotmail.com" className="brutal-button px-4 py-3">
+                Email
               </a>
-              <a
-                href="https://www.mihuashi.com/profiles/8237329"
-                target="_blank"
-                rel="noreferrer"
-                className="brass-link underline transition-colors"
-              >
+              <a href="https://www.mihuashi.com/profiles/8237329" target="_blank" rel="noreferrer" className="brutal-button brutal-button-active px-4 py-3">
                 <T zh="米画师 ↗" en="Mihuashi ↗" />
               </a>
             </div>
           </div>
 
-          <div
-            className="steam-frame relative h-[260px] w-[260px] overflow-hidden sm:h-[320px] sm:w-[320px]"
-          >
-            <img
-              src="/images/about/portrait.jpg"
-              alt="Jiess"
-              className="h-full w-full object-cover"
-            />
+          <div className="space-y-5">
+            <div className="brutal-tag font-ui inline-flex px-4 py-3 text-xs">
+              <T zh="PROFILE CARD" en="PROFILE CARD" />
+            </div>
+            <div className="brutal-frame relative aspect-square overflow-hidden">
+              <img src="/images/about/portrait.jpg" alt="Jiess" className="h-full w-full object-cover" />
+            </div>
+            <div className="brutal-panel-sm p-4">
+              <p className="font-ui text-xs uppercase" style={{ color: "var(--color-muted)" }}>
+                <T zh="Available for commissions" en="Available for commissions" />
+              </p>
+              <p className="mt-2 break-all text-sm font-black" style={{ color: "var(--color-text)" }}>
+                lyz475223863@hotmail.com
+              </p>
+            </div>
           </div>
         </div>
         <EnterGalleryOnScroll />

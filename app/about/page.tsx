@@ -10,83 +10,58 @@ export const dynamic = "force-static";
 
 export default function AboutPage() {
   return (
-    <div className="mx-auto max-w-3xl px-6 py-14">
+    <div className="mx-auto max-w-4xl px-4 py-10 sm:px-6 sm:py-14">
       <Link
         href="/"
-        className="brass-link font-ui mb-10 inline-flex items-center gap-2 text-sm underline transition-colors"
-        style={{ color: "var(--color-muted)" }}
+        className="font-ui brutal-button mb-8 inline-flex items-center gap-2 px-4 py-3 text-xs"
       >
         <span>←</span>
         <span>
-          <T zh="全部作品" en="All works" />
+          <T zh="返回首页" en="Back home" />
         </span>
       </Link>
 
-      {/* Portrait placeholder */}
-      <div
-        className="steam-frame relative mb-12 overflow-hidden"
-        style={{
-          width: "180px",
-          height: "180px",
-        }}
-      >
-        <img
-          src="/images/about/portrait.jpg"
-          alt="Jiess"
-          className="h-full w-full object-cover"
-        />
-      </div>
+      <div className="grid gap-8 md:grid-cols-[220px_1fr] md:items-start">
+        {/* Portrait */}
+        <div className="brutal-frame relative aspect-square overflow-hidden">
+          <img
+            src="/images/about/portrait.jpg"
+            alt="Jiess"
+            className="h-full w-full object-cover"
+          />
+        </div>
 
-      <div
-        className="mb-10 border-b pb-10"
-        style={{ borderColor: "var(--color-border-soft)" }}
-      >
-        <p
-          className="brass-label font-ui mb-3 text-xs"
-        >
-          <T zh="关于" en="About" />
-        </p>
-        <h1
-          className="font-display text-4xl font-semibold sm:text-5xl"
-          style={{ color: "var(--color-text)" }}
-        >
-          Jiess
-        </h1>
-      </div>
+        <div className="brutal-panel p-6 sm:p-8">
+          <p className="brass-label font-ui mb-5 text-xs">
+            <T zh="关于" en="About" />
+          </p>
+          <h1 className="font-display text-6xl font-black uppercase leading-none sm:text-8xl">
+            Jiess
+          </h1>
 
-      <div className="space-y-5 font-ui text-sm leading-relaxed" style={{ color: "var(--color-muted)" }}>
-        <p>
-          <T zh="自我介绍。" en="artist statement." />
-        </p>
-      </div>
+          <div className="mt-8 border-l-[6px] py-1 pl-5 text-base font-black leading-7" style={{ borderColor: "var(--color-accent)", color: "var(--color-muted)" }}>
+            <p>
+              <T zh="自我介绍。" en="artist statement." />
+            </p>
+          </div>
 
-      {/* Contact */}
-      <div
-        className="mt-12 border-t pt-12"
-        style={{ borderColor: "var(--color-border)" }}
-      >
-        <p
-          className="brass-label font-ui mb-4 text-xs"
-        >
-          <T zh="联系" en="Contact" />
-        </p>
-        <div className="font-ui flex flex-col gap-2 text-sm">
-          <a
-            href="mailto:lyz475223863@hotmail.com"
-            className="brass-link underline transition-colors"
-            style={{ color: "var(--color-text)" }}
-          >
-            lyz475223863@hotmail.com
-          </a>
-          <a
-            href="https://www.mihuashi.com/profiles/8237329"
-            target="_blank"
-            rel="noreferrer"
-            className="brass-link underline transition-colors"
-            style={{ color: "var(--color-text)" }}
-          >
-            <T zh="米画师 ↗" en="Mihuashi ↗" />
-          </a>
+          {/* Contact */}
+          <div className="font-ui mt-10 flex flex-col gap-4 text-xs sm:flex-row">
+            <a
+              href="mailto:lyz475223863@hotmail.com"
+              className="brutal-button px-4 py-3"
+            >
+              Email
+            </a>
+            <a
+              href="https://www.mihuashi.com/profiles/8237329"
+              target="_blank"
+              rel="noreferrer"
+              className="brutal-button brutal-button-active px-4 py-3"
+            >
+              <T zh="米画师 ↗" en="Mihuashi ↗" />
+            </a>
+          </div>
         </div>
       </div>
     </div>
