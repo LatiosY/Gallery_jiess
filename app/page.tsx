@@ -30,9 +30,17 @@ export default function HomePage() {
             <p className="font-ui mt-8 max-w-xl text-base uppercase leading-relaxed" style={{ color: "var(--color-text)" }}>
               <T zh="插画 · 角色设计" en="Illustration · Character Design" />
             </p>
-            <p className="mt-8 max-w-xl border-l-[6px] py-1 pl-5 text-lg font-black leading-8" style={{ borderColor: "var(--color-accent)", color: "var(--color-muted)" }}>
-              <T zh="自我介绍。" en="artist statement." />
-            </p>
+            <div className="mt-8 max-w-xl space-y-2 border-l-[6px] py-1 pl-5 text-lg font-black leading-8" style={{ borderColor: "var(--color-accent)", color: "var(--color-muted)" }}>
+              <p>
+                <T zh="吾是jiess！" en="This is Jiess!" />
+              </p>
+              <p>
+                <T zh="吾会努力锻炼绘画技艺的！" en="I will keep working hard to improve my art skills!" />
+              </p>
+              <p>
+                <T zh="吾有口癖！请老大多多包涵！" en="I have a quirky way of speaking. Thank you for understanding!" />
+              </p>
+            </div>
             <div className="font-ui mt-10 flex flex-col gap-4 text-xs sm:flex-row">
               <a href="mailto:lyz475223863@hotmail.com" className="brutal-button px-4 py-3">
                 Email
