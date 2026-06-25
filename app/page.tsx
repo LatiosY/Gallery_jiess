@@ -38,7 +38,7 @@ export default function HomePage() {
                 <T zh="吾会努力锻炼绘画技艺的！" en="I will keep working hard to improve my art skills!" />
               </p>
               <p>
-                <T zh="吾有口癖！请老大多多包涵！" en="I have a quirky way of speaking. Thank you for understanding!" />
+                <T zh="吾有口癖！请老大多多包涵！" en="Welcome to my gallery!" />
               </p>
             </div>
             <div className="font-ui mt-10 flex flex-col gap-4 text-xs sm:flex-row">
