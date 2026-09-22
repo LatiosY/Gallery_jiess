@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import BrutalCursor from "@/components/BrutalCursor";
 import { I18nProvider } from "@/components/I18nProvider";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://gallery-jiess.vercel.app";
@@ -46,6 +47,7 @@ export default function RootLayout({
           <Nav />
           <main className="flex-1 pt-[57px]">{children}</main>
           <Footer />
+          <BrutalCursor />
         </I18nProvider>
       </body>
     </html>
